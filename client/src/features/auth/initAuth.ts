@@ -1,5 +1,5 @@
 import { setUnauthorizedHandler } from '../../api/client';
-import { queryClient } from '../../lib/query-client';
+import { queryClient } from '../../app/query-client';
 import { useAuthStore } from './store';
 
 /**

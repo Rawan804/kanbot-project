@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+﻿import { useEffect, type ReactNode } from 'react';
 import logo from '../../../../../assets/kanbot-icon.svg';
 interface Props {
   title: string;
@@ -16,20 +16,21 @@ export function AuthLayout({
     document.title = `${title} · Kanbot`;
   }, [title]);
   return (
-    <main className="min-h-screen min-h-[100dvh] w-full flex items-center justify-center
-      bg-[#f3f5fc] px-3 py-6 sm:px-4 sm:py-10">
+    <main className="flex min-h-screen min-h-[100dvh] w-full items-center justify-center
+      bg-kanbot-background px-3 py-6 dark:bg-kanbot-dark-background sm:px-4 sm:py-10">
       <div className="w-full max-w-[440px]">
         {/* Main Card */}
-        <div className="overflow-hidden rounded-[22px] sm:rounded-[28px] bg-white
-          border border-[#e9ecf5]
-          shadow-[0_16px_55px_rgba(35,52,110,0.09)]">
+        <div className="overflow-hidden rounded-[22px] sm:rounded-[28px]
+          bg-kanbot-surface dark:bg-kanbot-dark-surface
+          border border-kanbot-border dark:border-kanbot-dark-border
+          shadow-[0_16px_55px_rgba(35,52,110,0.09)] dark:shadow-[0_16px_55px_rgba(0,0,0,0.4)]">
           {/* Curved Header */}
-          <div className="relative h-[140px] sm:h-[175px] bg-[#eef1ff]">
+          <div className="relative h-[140px] sm:h-[175px] bg-kanbot-primary-soft dark:bg-kanbot-dark-primary-soft">
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute -top-20 -left-16 h-48 w-48
-                rounded-full bg-[#dce3ff] opacity-70" />
-              <div className="absolute -top-24 -right-12 h-52 w-52
-                rounded-full bg-[#e2e7ff] opacity-80" />
+              <div className="absolute -left-16 -top-20 h-48 w-48
+                rounded-full bg-kanbot-primary-soft opacity-70 dark:bg-kanbot-dark-surface-elevated" />
+              <div className="absolute -right-12 -top-24 h-52 w-52
+                rounded-full bg-kanbot-primary-soft opacity-80 dark:bg-kanbot-dark-primary-soft" />
             </div>
             {/* Curved Bottom */}
             <svg
@@ -40,7 +41,7 @@ export function AuthLayout({
             >
               <path
                 d="M0 25 C110 75 320 75 440 25 L440 65 L0 65 Z"
-                fill="white"
+                className="fill-kanbot-surface dark:fill-kanbot-dark-surface"
               />
             </svg>
             {/* Brand */}
@@ -53,10 +54,10 @@ export function AuthLayout({
                 height={58}
                 className="h-[48px] w-[48px] sm:h-[58px] sm:w-[58px]
                   rounded-[15px] sm:rounded-[18px]
-                  shadow-lg shadow-[#4F46E5]/25"
+                  shadow-lg shadow-kanbot-primary/25"
               />
-              <span className="mt-2 text-lg sm:text-xl font-bold
-                tracking-tight text-[#253052]">
+              <span className="mt-2 text-lg font-bold
+                tracking-tight text-kanbot-text dark:text-kanbot-dark-text sm:text-xl">
                 Kanbot
               </span>
             </div>
@@ -64,26 +65,26 @@ export function AuthLayout({
           {/* Form Content */}
           <div className="px-5 pb-7 pt-2 sm:px-10 sm:pb-9">
             <div className="mb-6 sm:mb-7 text-center">
-              <h1 className="text-2xl sm:text-[26px] font-bold
-                tracking-tight text-[#202945]">
+              <h1 className="text-2xl font-bold
+                tracking-tight text-kanbot-text dark:text-kanbot-dark-text sm:text-[26px]">
                 {title}
               </h1>
               <p className="mt-2 text-sm leading-relaxed
-                text-[#8991a7]">
+                text-kanbot-muted dark:text-kanbot-dark-muted">
                 {subtitle}
               </p>
             </div>
             <div className="w-full">
               {children}
             </div>
-            <div className="mt-6 sm:mt-7 text-center text-sm
-              text-[#858da3]">
+            <div className="mt-6 text-center text-sm
+              text-kanbot-muted dark:text-kanbot-dark-muted sm:mt-7">
               {footer}
             </div>
           </div>
         </div>
-        <p className="mt-5 sm:mt-6 text-center text-xs text-[#a1a8ba]">
-          © {new Date().getFullYear()} Kanbot
+        <p className="mt-5 text-center text-xs text-kanbot-muted dark:text-kanbot-dark-muted sm:mt-6">
+          &copy; {new Date().getFullYear()} Kanbot
         </p>
       </div>
     </main>

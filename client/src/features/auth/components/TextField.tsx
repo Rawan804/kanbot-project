@@ -1,4 +1,4 @@
-import { useId, type InputHTMLAttributes, type ReactNode } from 'react';
+﻿import { useId, type InputHTMLAttributes, type ReactNode } from 'react';
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
@@ -15,7 +15,7 @@ export function TextField({ label, error, hint, trailing, className = '', id: cu
     <div className="mb-4">
       <label
         htmlFor={id}
-        className="block text-sm font-medium text-slate-800 dark:text-slate-200 mb-1.5"
+        className="mb-1.5 block text-sm font-medium text-kanbot-text dark:text-kanbot-dark-text"
       >
         {label}
       </label>
@@ -24,12 +24,12 @@ export function TextField({ label, error, hint, trailing, className = '', id: cu
           id={id}
           aria-invalid={!!error}
           aria-describedby={describedBy}
-          className={`w-full rounded-lg border bg-white dark:bg-[#131a30] text-slate-900 dark:text-slate-100 text-base sm:text-sm px-3.5 py-2.5 transition-colors placeholder:text-slate-400 focus:outline-none focus:ring-2 disabled:bg-slate-50 dark:disabled:bg-slate-900/50 disabled:text-slate-500 disabled:cursor-not-allowed ${
+          className={`w-full rounded-lg border bg-kanbot-surface px-3.5 py-2.5 text-base text-kanbot-text transition-colors placeholder:text-kanbot-muted focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:bg-kanbot-surface-elevated disabled:text-kanbot-muted dark:bg-kanbot-dark-surface dark:text-kanbot-dark-text dark:placeholder:text-kanbot-dark-muted dark:disabled:bg-kanbot-dark-surface-elevated dark:disabled:text-kanbot-dark-muted sm:text-sm ${
             trailing ? 'pr-16' : ''
           } ${
             error
               ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20'
-              : 'border-[#d6dbe8] dark:border-[#2a3556] focus:border-[#2f4bff] focus:ring-[#2f4bff]/20'
+              : 'border-kanbot-border focus:border-kanbot-primary focus:ring-kanbot-primary/20 dark:border-kanbot-dark-border'
           } ${className}`}
           {...input}
         />
@@ -44,11 +44,10 @@ export function TextField({ label, error, hint, trailing, className = '', id: cu
           {error}
         </p>
       ) : hint ? (
-        <p id={hintId} className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
+        <p id={hintId} className="mt-1.5 text-xs text-kanbot-muted dark:text-kanbot-dark-muted">
           {hint}
         </p>
       ) : null}
     </div>
   );
 }
-

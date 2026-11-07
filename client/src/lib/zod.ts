@@ -4,7 +4,6 @@ export type ValidationResult<T> =
   | { ok: true; data: T }
   | { ok: false; errors: Record<string, string> };
 
-/** Runs a zod schema and returns the first message per top-level field. */
 export function validate<T>(schema: z.ZodType<T>, values: unknown): ValidationResult<T> {
   const result = schema.safeParse(values);
   if (result.success) return { ok: true, data: result.data };

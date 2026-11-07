@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from 'react';
+﻿import type { ButtonHTMLAttributes } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
@@ -13,12 +13,12 @@ export function SubmitButton({ loading, loadingText, children, disabled, classNa
       type="submit"
       disabled={disabled || isBusy}
       aria-busy={isBusy}
-      className={`w-full inline-flex items-center justify-center gap-2 rounded-lg bg-[#2f4bff] hover:bg-[#253ecc] active:bg-[#1f35b2] text-white font-semibold py-2.5 px-4 text-base sm:text-sm shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed min-h-[44px] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2f4bff] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#131a30] ${className}`}
+      className={`inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-kanbot-primary px-4 py-2.5 text-base font-semibold text-white shadow-sm transition-all duration-150 hover:bg-kanbot-primary-hover hover:shadow active:bg-kanbot-primary-active disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-kanbot-primary focus-visible:ring-offset-2 dark:text-kanbot-dark-background dark:focus-visible:ring-offset-kanbot-dark-surface sm:text-sm ${className}`}
       {...rest}
     >
       {isBusy && (
         <svg
-          className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+          className="animate-spin -ml-1 mr-2 h-4 w-4 text-white dark:text-kanbot-dark-background"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

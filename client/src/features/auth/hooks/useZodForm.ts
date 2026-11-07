@@ -3,10 +3,6 @@ import type { z } from 'zod';
 import { ApiError, fieldErrors } from '../../../lib/api-error';
 import { validate } from '../../../lib/zod';
 type Errors<T> = Partial<Record<keyof T & string, string>>;
-/**
- * Small controlled-form hook: zod validation + server error mapping.
- * Guards against double submit (AUTH-1).
- */
 export function useZodForm<T extends Record<string, string>>(schema: z.ZodType<T>, initial: T) {
   const [values, setValues] = useState<T>(initial);
   const [errors, setErrors] = useState<Errors<T>>({});

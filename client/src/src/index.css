@@ -1,0 +1,389 @@
+@config "../tailwind.config.js";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================================================
+   DESIGN TOKENS — "Petal" palette
+   Light: warm paper background, lavender / dusty rose / sage / sky / sand accents.
+   Dark: deep charcoal-navy with tinted (not black) surfaces and muted accents.
+   HSL channel vars (--kanbot-*) stay for Tailwind-mapped utilities (alpha support).
+   --kb-* vars are plain colours used by the shared component classes below.
+======================================================================== */
+
+:root {
+  /* Primary: deep lavender #5B4FA3 */
+  --kanbot-primary: 250 35% 46%;
+  --kanbot-primary-hover: 250 37% 40%;
+  --kanbot-primary-active: 250 37% 34%;
+  --kanbot-primary-soft: 252 52% 94%;
+
+  /* Sidebar: warm paper */
+  --kanbot-sidebar-bg: 30 25% 94%;
+  --kanbot-sidebar-hover: 28 22% 90%;
+  --kanbot-sidebar-active: 252 52% 94%;
+  --kanbot-sidebar-text: 250 12% 19%;
+  --kanbot-sidebar-muted: 250 6% 45%;
+  --kanbot-sidebar-border: 28 22% 88%;
+  --kanbot-sidebar-active-text: 250 37% 40%;
+  --kanbot-sidebar-accent: 250 35% 46%;
+  --kanbot-sidebar-accent-text: 0 0% 100%;
+
+  --kb-bg: #faf7f3;
+  --kb-surface: #ffffff;
+  --kb-soft: #f4f0ec;
+  --kb-line: #ece5de;
+  --kb-text: #2c2a35;
+  --kb-muted: #6e6a78;
+  --kb-primary: #5b4fa3;
+  --kb-on-primary: #ffffff;
+
+  /* Accent families: bg = pill / tint, fg = text on bg (AA), dot = indicator colour */
+  --kb-lav-bg: #e9e4f7;  --kb-lav-fg: #54478f;  --kb-lav-dot: #8f7fd6;
+  --kb-rose-bg: #f6e1e4; --kb-rose-fg: #94405a; --kb-rose-dot: #d98ca0;
+  --kb-sage-bg: #e0ebdd; --kb-sage-fg: #3f6a48; --kb-sage-dot: #86b08e;
+  --kb-sky-bg: #dfeaf5;  --kb-sky-fg: #305f8a;  --kb-sky-dot: #7fa9d1;
+  --kb-sand-bg: #f7ebd9; --kb-sand-fg: #80511a; --kb-sand-dot: #d9a860;
+
+  /* Board lanes (lighter than the pills so cards stand out) */
+  --kb-col-todo: #eef3f9;
+  --kb-col-progress: #f0ecf9;
+  --kb-col-review: #f9edef;
+  --kb-col-done: #edf3eb;
+
+  --kb-shadow: 0 1px 2px rgba(70, 50, 60, 0.05), 0 4px 14px rgba(70, 50, 60, 0.06);
+  --kb-shadow-hover: 0 2px 4px rgba(70, 50, 60, 0.06), 0 14px 30px rgba(70, 50, 60, 0.12);
+  --kb-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236e6a78' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Primary: soft lavender #b4a8f0 */
+  --kanbot-primary: 249 78% 80%;
+  --kanbot-primary-hover: 249 85% 85%;
+  --kanbot-primary-active: 249 65% 72%;
+  --kanbot-primary-soft: 247 29% 28%;
+
+  --kanbot-sidebar-bg: 248 17% 12%;
+  --kanbot-sidebar-hover: 247 18% 19%;
+  --kanbot-sidebar-active: 247 29% 24%;
+  --kanbot-sidebar-text: 250 30% 94%;
+  --kanbot-sidebar-muted: 248 10% 68%;
+  --kanbot-sidebar-border: 247 16% 22%;
+  --kanbot-sidebar-active-text: 249 78% 84%;
+  --kanbot-sidebar-accent: 249 78% 80%;
+  --kanbot-sidebar-accent-text: 248 20% 11%;
+
+  --kb-bg: #17161f;
+  --kb-surface: #242336;
+  --kb-soft: #2d2c42;
+  --kb-line: #373550;
+  --kb-text: #eceaf4;
+  --kb-muted: #a8a5b9;
+  --kb-primary: #b4a8f0;
+  --kb-on-primary: #17161f;
+
+  --kb-lav-bg: #38335f;  --kb-lav-fg: #d0c8f7;  --kb-lav-dot: #9a8ce6;
+  --kb-rose-bg: #4d2d3d; --kb-rose-fg: #f2c3cf; --kb-rose-dot: #ce8497;
+  --kb-sage-bg: #2d4337; --kb-sage-fg: #c0e0c7; --kb-sage-dot: #7fb08a;
+  --kb-sky-bg: #2a4360;  --kb-sky-fg: #bdd9f4;  --kb-sky-dot: #6fa2d4;
+  --kb-sand-bg: #4c3b26; --kb-sand-fg: #edcf9d; --kb-sand-dot: #cfa25b;
+
+  --kb-col-todo: #1d2638;
+  --kb-col-progress: #252239;
+  --kb-col-review: #2c2032;
+  --kb-col-done: #1c2d27;
+
+  --kb-shadow: 0 1px 2px rgba(0, 0, 0, 0.28), 0 4px 14px rgba(0, 0, 0, 0.24);
+  --kb-shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.32), 0 14px 30px rgba(0, 0, 0, 0.4);
+  --kb-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8a5b9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+@layer components {
+  /* ---- Surfaces ---- */
+  .kb-app {
+    background: var(--kb-bg);
+    color: var(--kb-text);
+  }
+  .kb-card {
+    background: var(--kb-surface);
+    border-radius: 1.25rem;
+    box-shadow: var(--kb-shadow);
+  }
+  .kb-lift {
+    transition: box-shadow 160ms ease, transform 160ms ease;
+  }
+  .kb-lift:hover {
+    box-shadow: var(--kb-shadow-hover);
+    transform: translateY(-2px);
+  }
+  .kb-text {
+    color: var(--kb-text);
+  }
+  .kb-muted {
+    color: var(--kb-muted);
+  }
+
+  /* ---- Accent tones (pills, tints) ---- */
+  .kb-tone-lav { background: var(--kb-lav-bg); color: var(--kb-lav-fg); }
+  .kb-tone-rose { background: var(--kb-rose-bg); color: var(--kb-rose-fg); }
+  .kb-tone-sage { background: var(--kb-sage-bg); color: var(--kb-sage-fg); }
+  .kb-tone-sky { background: var(--kb-sky-bg); color: var(--kb-sky-fg); }
+  .kb-tone-sand { background: var(--kb-sand-bg); color: var(--kb-sand-fg); }
+  .kb-tone-neutral { background: var(--kb-soft); color: var(--kb-muted); }
+
+  .kb-dot-lav { background: var(--kb-lav-dot); }
+  .kb-dot-rose { background: var(--kb-rose-dot); }
+  .kb-dot-sage { background: var(--kb-sage-dot); }
+  .kb-dot-sky { background: var(--kb-sky-dot); }
+  .kb-dot-sand { background: var(--kb-sand-dot); }
+
+  .kb-col-todo { background: var(--kb-col-todo); }
+  .kb-col-progress { background: var(--kb-col-progress); }
+  .kb-col-review { background: var(--kb-col-review); }
+  .kb-col-done { background: var(--kb-col-done); }
+
+  /* ---- Small building blocks ---- */
+  .kb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    background: var(--kb-soft);
+    color: var(--kb-text);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+  }
+  .kb-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 9999px;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1rem;
+    white-space: nowrap;
+  }
+  .kb-input {
+    height: 2.5rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    background: var(--kb-soft);
+    color: var(--kb-text);
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .kb-input::placeholder {
+    color: var(--kb-muted);
+  }
+  .kb-input:hover {
+    border-color: var(--kb-line);
+  }
+  .kb-input:focus {
+    outline: none;
+    background: var(--kb-surface);
+    border-color: var(--kb-primary);
+    box-shadow: 0 0 0 3px hsl(var(--kanbot-primary) / 0.22);
+  }
+  .kb-select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: 2.25rem;
+    background-image: var(--kb-chevron);
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    background-size: 1rem;
+  }
+  .kb-select[data-active='true'] {
+    background-color: var(--kb-lav-bg);
+    color: var(--kb-lav-fg);
+    font-weight: 600;
+  }
+  .kb-icon-btn {
+    display: inline-flex;
+    height: 2.25rem;
+    width: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    color: var(--kb-muted);
+    transition: background-color 120ms ease, color 120ms ease;
+  }
+  .kb-icon-btn:hover {
+    background: var(--kb-soft);
+    color: var(--kb-text);
+  }
+  .kb-menu {
+    background: var(--kb-surface);
+    border-radius: 1rem;
+    box-shadow: var(--kb-shadow-hover), 0 0 0 1px var(--kb-line);
+    padding: 0.375rem;
+  }
+  .kb-menu-item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.625rem;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    font-size: 0.875rem;
+    color: var(--kb-text);
+    transition: background-color 100ms ease;
+  }
+  .kb-menu-item:hover,
+  .kb-menu-item:focus-visible {
+    background: var(--kb-soft);
+  }
+  .kb-menu-item[data-danger='true'] {
+    color: var(--kb-rose-fg);
+  }
+  .kb-menu-item[data-danger='true']:hover {
+    background: var(--kb-rose-bg);
+  }
+  .kb-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+  .kb-shadow-lg {
+    --tw-shadow: var(--kb-shadow-hover);
+    --tw-shadow-colored: var(--kb-shadow-hover);
+  }
+  .kb-drop-over {
+    background: color-mix(in srgb, var(--kb-surface) 55%, transparent);
+    box-shadow: inset 0 0 0 2px var(--kb-lav-dot);
+  }
+  .kb-checkbox {
+    height: 1rem;
+    width: 1rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: var(--kb-primary);
+  }
+
+  /* Hover-only controls on devices that can hover; always visible on touch / keyboard focus. */
+  @media (hover: hover) {
+    .kb-reveal {
+      opacity: 0;
+      transition: opacity 120ms ease;
+    }
+    .group:hover .kb-reveal,
+    .group:focus-within .kb-reveal,
+    .kb-reveal:focus-within,
+    .kb-reveal:focus-visible {
+      opacity: 1;
+    }
+  }
+}
+
+/* ========================================
+   GLOBAL STYLES
+======================================== */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  font-family: Inter, "DM Sans", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--kb-bg);
+  color: var(--kb-text);
+}
+
+/* Visible, consistent keyboard focus */
+:focus-visible {
+  outline: 2px solid hsl(var(--kanbot-primary));
+  outline-offset: 2px;
+}
+
+/* ========================================
+   BOARD SCROLLING
+   Apply `kanbot-scroll` to the horizontal board container.
+======================================== */
+
+.kanbot-scroll {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--kb-line) transparent;
+}
+
+.kanbot-scroll::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.kanbot-scroll::-webkit-scrollbar-thumb {
+  background: var(--kb-line);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes kanbot-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes kanbot-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kanbot-drawer-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.kanbot-fade-enter { animation: kanbot-fade-in 160ms ease-out both; }
+.kanbot-dialog-enter { animation: kanbot-dialog-in 180ms ease-out both; }
+.kanbot-drawer-enter { animation: kanbot-drawer-in 180ms ease-out both; }
+
+/* ========================================
+   ACCESSIBILITY - REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

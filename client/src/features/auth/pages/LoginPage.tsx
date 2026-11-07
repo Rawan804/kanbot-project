@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router';
+﻿import { Link, useLocation } from 'react-router';
 import { AuthLayout } from '../components/AuthLayout';
 import { FormAlert } from '../components/FormAlert';
 import { PasswordField } from '../components/PasswordField';
@@ -10,7 +10,7 @@ import { useAuthStore } from '../store';
 export function LoginPage() {
   const { field, onSubmit, formError, isSubmitting } = useLogin();
   const exitReason = useAuthStore((s) => s.exitReason);
-  const { search } = useLocation(); // keep ?redirect= when switching to register
+  const { search } = useLocation(); 
 
   return (
     <AuthLayout
@@ -21,7 +21,7 @@ export function LoginPage() {
           New to Kanbot?{' '}
           <Link
             to={`/register${search}`}
-            className="font-semibold text-[#2f4bff] hover:text-[#253ecc] hover:underline transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2f4bff] rounded"
+            className="font-semibold text-kanbot-primary hover:text-kanbot-primary-hover hover:underline transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-kanbot-primary rounded"
           >
             Create an account
           </Link>

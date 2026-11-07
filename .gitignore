@@ -6,5 +6,8 @@ data
 .DS_Store
 design/
 docs/
+e2e
+storybook-static
+test-results
 *.zip
 *.rar

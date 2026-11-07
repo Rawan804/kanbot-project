@@ -1,4 +1,4 @@
-import { useState, type ComponentProps } from 'react';
+﻿import { useState, type ComponentProps } from 'react';
 import { TextField } from './TextField';
 
 type Props = Omit<ComponentProps<typeof TextField>, 'type' | 'trailing'>;
@@ -13,7 +13,7 @@ export function PasswordField(props: Props) {
       trailing={
         <button
           type="button"
-          className="text-xs font-semibold text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 px-2.5 py-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2f4bff]"
+          className="rounded-md px-2.5 py-1.5 text-xs font-semibold text-kanbot-muted transition-colors hover:bg-kanbot-surface-elevated hover:text-kanbot-text focus:outline-none focus-visible:ring-2 focus-visible:ring-kanbot-primary dark:text-kanbot-dark-muted dark:hover:bg-kanbot-dark-surface-elevated dark:hover:text-kanbot-dark-text"
           aria-pressed={visible}
           aria-label={visible ? 'Hide password' : 'Show password'}
           onClick={() => setVisible((v) => !v)}

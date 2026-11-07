@@ -6,10 +6,10 @@ export function FullPageLoader() {
       aria-live="polite"
       className="flex min-h-screen min-h-[100dvh] w-full flex-col
         items-center justify-center gap-3
-        bg-[#f5f6fa] dark:bg-[#0b1020]"
+        bg-kanbot-background dark:bg-kanbot-dark-background"
     >
       <svg
-        className="h-8 w-8 animate-spin text-[#2f4bff]"
+        className="h-8 w-8 animate-spin text-kanbot-primary"
         viewBox="0 0 24 24"
         fill="none"
         aria-hidden="true"
@@ -29,7 +29,7 @@ export function FullPageLoader() {
         />
       </svg>
 
-      <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
+      <span className="text-sm font-medium text-kanbot-muted dark:text-kanbot-dark-muted">
         Loading Kanbot…
       </span>
     </div>

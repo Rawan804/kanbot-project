@@ -1,12 +1,12 @@
 const KEY = 'kanbot.token';
 
-// Only the JWT is stored client-side (NFR-7). Never log it.
+
 export const tokenStorage = {
   get(): string | null {
     try {
       return localStorage.getItem(KEY);
     } catch {
-      return null; // storage blocked (private mode, etc.)
+      return null; 
     }
   },
   set(token: string): void {

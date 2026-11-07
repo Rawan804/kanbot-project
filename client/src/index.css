@@ -1,6 +1,167 @@
+@config "../tailwind.config.js";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Sidebar + primary tokens. Values are HSL channels so Tailwind can apply alpha. */
+
+:root {
+  /* Primary blue #2563EB */
+  --kanbot-primary: 221.2 83.2% 53.3%;
+  --kanbot-primary-hover: 224.3 76.3% 48%;
+  --kanbot-primary-active: 225.9 70.7% 40.2%;
+  --kanbot-primary-soft: 221 90% 94%;
+
+  /* Sidebar #F0F2F5 */
+  --kanbot-sidebar-bg: 216 20% 95.1%;
+  --kanbot-sidebar-hover: 220 30% 91%;
+  --kanbot-sidebar-active: 221 90% 92%;
+  --kanbot-sidebar-text: 218 54% 19.6%; /* #172B4D */
+  --kanbot-sidebar-muted: 218 15.5% 45.5%; /* #626F86 */
+  --kanbot-sidebar-border: 220 16% 89%; /* #DFE2E8 */
+  --kanbot-sidebar-active-text: 224.3 76.3% 48%;
+  --kanbot-sidebar-accent: 221.2 83.2% 53.3%;
+  --kanbot-sidebar-accent-text: 0 0% 100%;
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Primary blue #5794F7 */
+  --kanbot-primary: 217.1 90.2% 65.5%;
+  --kanbot-primary-hover: 216.5 92.4% 72.2%;
+  --kanbot-primary-active: 218 71% 56%;
+  --kanbot-primary-soft: 214.5 37% 21.2%;
+
+  /* Sidebar #141F30 */
+  --kanbot-sidebar-bg: 216.4 41.2% 13.3%;
+  --kanbot-sidebar-hover: 214.5 37% 21.2%;
+  --kanbot-sidebar-active: 214.5 37% 21.2%;
+  --kanbot-sidebar-text: 215.3 51.5% 93.5%;
+  --kanbot-sidebar-muted: 214.3 21% 67.3%;
+  --kanbot-sidebar-border: 215.7 30.1% 24.1%;
+  --kanbot-sidebar-active-text: 216 90% 65%;
+  --kanbot-sidebar-accent: 216 90% 65%;
+  --kanbot-sidebar-accent-text: 218 42% 11%;
+}
+
+/* ========================================
+   SHARED SURFACE TOKENS (one place for light/dark → fewer dark: variants in JSX)
+======================================== */
+
+:root {
+  --kb-surface: #ffffff;
+  --kb-soft: #f0f3f9;
+  --kb-line: #e3e7ee;
+  --kb-text: #172b4d;
+  --kb-muted: #626f86;
+  --kb-shadow: 0 1px 2px rgba(23, 43, 77, 0.05), 0 3px 12px rgba(23, 43, 77, 0.07);
+  --kb-shadow-hover: 0 2px 4px rgba(23, 43, 77, 0.06), 0 10px 26px rgba(23, 43, 77, 0.13);
+}
+
+.dark {
+  --kb-surface: #182438;
+  --kb-soft: #213047;
+  --kb-line: #2b3a50;
+  --kb-text: #e6edf7;
+  --kb-muted: #9aa9bd;
+  --kb-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 3px 12px rgba(0, 0, 0, 0.22);
+  --kb-shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.3), 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+@layer components {
+  .kb-card {
+    background: var(--kb-surface);
+    border-radius: 1.25rem;
+    box-shadow: var(--kb-shadow);
+  }
+  .kb-lift {
+    transition: box-shadow 150ms ease;
+  }
+  .kb-lift:hover {
+    box-shadow: var(--kb-shadow-hover);
+  }
+  .kb-text {
+    color: var(--kb-text);
+  }
+  .kb-muted {
+    color: var(--kb-muted);
+  }
+  .kb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    background: var(--kb-soft);
+    color: var(--kb-text);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+  }
+  .kb-input {
+    height: 2.5rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    background: var(--kb-soft);
+    color: var(--kb-text);
+    padding: 0 1rem;
+    font-size: 0.875rem;
+  }
+  .kb-input::placeholder {
+    color: var(--kb-muted);
+  }
+  .kb-input:focus {
+    outline: none;
+    background: var(--kb-surface);
+    border-color: hsl(var(--kanbot-primary));
+    box-shadow: 0 0 0 3px hsl(var(--kanbot-primary) / 0.2);
+  }
+
+  .board-column {
+    position: relative;
+    overflow: hidden;
+    background: var(--kb-soft);
+    border-color: var(--kb-line);
+  }
+  .board-column::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 5px;
+    background: var(--board-column-accent);
+    content: "";
+  }
+  .board-column[data-status="todo"] {
+    --board-column-accent: #3976d2;
+  }
+  .board-column[data-status="in_progress"] {
+    --board-column-accent: #f2c99e;
+  }
+  .board-column[data-status="in_review"] {
+    --board-column-accent: #f2c8d2;
+  }
+  .board-column[data-status="done"] {
+    --board-column-accent: #4a9a69;
+  }
+  .board-task-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--kb-line);
+    border-radius: 0.75rem;
+    background: var(--kb-surface);
+    box-shadow: var(--kb-shadow);
+    transition: box-shadow 160ms ease, border-color 160ms ease;
+  }
+  .board-task-card:hover {
+    border-color: hsl(var(--kanbot-primary) / 0.32);
+    box-shadow: var(--kb-shadow-hover);
+  }
+}
+
+/* ========================================
+   GLOBAL STYLES
+======================================== */
 
 html,
 body,
@@ -12,4 +173,101 @@ body,
 
 body {
   min-width: 320px;
+  font-family: Inter, "DM Sans", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply bg-kanbot-background text-kanbot-text;
+}
+
+.dark body {
+  @apply bg-kanbot-dark-background text-kanbot-dark-text;
+}
+
+/* Visible, consistent keyboard focus */
+:focus-visible {
+  outline: 2px solid hsl(var(--kanbot-primary));
+  outline-offset: 2px;
+}
+
+/* ========================================
+   BOARD SCROLLING
+   Apply `kanbot-scroll` to the horizontal board container.
+======================================== */
+
+.kanbot-scroll {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #c3cad6 transparent;
+}
+
+.dark .kanbot-scroll {
+  scrollbar-color: #2b3a50 transparent;
+}
+
+.kanbot-scroll::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.kanbot-scroll::-webkit-scrollbar-thumb {
+  background: #c3cad6;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.dark .kanbot-scroll::-webkit-scrollbar-thumb {
+  background: #2b3a50;
+  background-clip: content-box;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes kanbot-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes kanbot-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kanbot-drawer-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.kanbot-fade-enter { animation: kanbot-fade-in 160ms ease-out both; }
+.kanbot-dialog-enter { animation: kanbot-dialog-in 180ms ease-out both; }
+.kanbot-drawer-enter { animation: kanbot-drawer-in 180ms ease-out both; }
+
+/* ========================================
+   ACCESSIBILITY - REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -2,11 +2,6 @@ import { useEffect } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 
-/**
- * Lenis smooth scroll, driven by GSAP's ticker so both share one rAF loop.
- * Mount once, near the root. Add `data-lenis-prevent` to inner scroll areas
- * (dialogs, the board, the AI drawer) so they keep native scrolling.
- */
 export function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

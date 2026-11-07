@@ -34,7 +34,18 @@ export async function request<T>(
 
   if (res.status === 204) return undefined as T;
 
-  const json: unknown = await res.json().catch(() => null);
+  let json: unknown = null;
+  try {
+    json = await res.json();
+  } catch {
+    if (res.ok) {
+      throw new ApiError(
+        res.status,
+        'INVALID_RESPONSE',
+        'The server returned an invalid response. Please try again.',
+      );
+    }
+  }
   if (!res.ok) {
     const e = (json as ApiErrorBody | null)?.error;
     const err = new ApiError(

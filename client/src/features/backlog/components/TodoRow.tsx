@@ -155,7 +155,7 @@ export function TodoRow({
             'flex-shrink-0 cursor-grab touch-none rounded p-0.5',
             'text-kanbot-muted/40 hover:text-kanbot-muted dark:text-kanbot-dark-muted/40 dark:hover:text-kanbot-dark-muted',
             'focus:outline-none focus-visible:ring-2 focus-visible:ring-kanbot-primary',
-            'opacity-0 group-hover:opacity-100 transition-opacity',
+            'opacity-60 transition-opacity group-hover:opacity-100',
           )}
           {...listeners}
         >
@@ -171,7 +171,8 @@ export function TodoRow({
         role="button"
         tabIndex={0}
         aria-label={`Open ${todo.key}: ${todo.title}`}
-        onPointerDown={(event) => listeners?.onPointerDown?.(event)}
+        onMouseDown={(event) => listeners?.onMouseDown?.(event)}
+        onTouchStart={(event) => listeners?.onTouchStart?.(event)}
         onClick={() => onOpen(todo)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {

@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn';
 import { EmptyArt } from './EmptyArt';
-
 interface EmptyStateProps {
   icon?: ReactNode;
   title: string;
@@ -12,7 +11,6 @@ interface EmptyStateProps {
   illustration?: boolean;
   className?: string;
 }
-
 /**
  * Reusable empty/error state for lists and pages.
  */

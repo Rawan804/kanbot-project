@@ -21,20 +21,74 @@ responsive productivity app.
   estimate story points, summarize sprints, and ask project-related questions.
   The backend includes a mock mode that works without an AI provider.
 - **Productivity extras:** light and dark themes, responsive navigation,
-  keyboard shortcuts, undo for supported actions, exports, and installable
-  frontend assets.
+  keyboard shortcuts, undo for supported actions, CSV and Markdown exports,
+  sprint templates, backlog bulk actions, charts, and installable frontend
+  assets.
+- **Polished interaction and accessibility:** quick command palette, inline
+  task editing, drag-and-drop with keyboard alternatives, clear loading/empty/
+  error states, keyboard-accessible dialogs, visible focus, and reduced-motion
+  support.
 
 Kanbot is designed for an individual. Team collaboration, sharing, and task
 assignees are not part of the current product.
+
+## Additional frontend features
+
+The frontend includes improvements beyond the core product requirements:
+
+- **Faster task workflows:** quick-create tasks, edit titles and story points
+  inline, filter the backlog by priority, type, or label, select multiple tasks
+  for bulk actions, and undo supported task moves or deletions.
+- **Planning and review:** sprint templates for duration and capacity, sprint
+  velocity and burndown charts, and CSV/Markdown exports for tasks and sprint
+  summaries.
+- **More useful AI prompts:** improve task descriptions, estimate story points,
+  get contextual suggestions or a daily stand-up prompt, and review generated
+  suggestions before saving. The assistant does not change project data
+  without confirmation.
+- **Navigation and mobile UX:** a `Ctrl/Cmd+K` command palette, shortcut help,
+  keyboard navigation shortcuts, responsive navigation, and a mobile bottom
+  navigation bar.
+- **Installability and local preferences:** a service worker precaches static
+  app assets for installability and offline app loading. Theme preference and
+  up to 30 AI chat messages per project are kept in browser `localStorage`;
+  chat history is device-local and is not synced. API-backed actions still
+  need a network connection.
+
+## Design and visual system
+
+The interface uses a clean, compact project-management style with cool neutral
+surfaces, dark slate text, blue primary actions, and softer status colors for
+the Kanban columns. Design tokens are centralized in
+[`client/tailwind.config.js`](client/tailwind.config.js) and theme-aware CSS
+variables in [`client/src/index.css`](client/src/index.css).
+
+- **Styling:** Tailwind CSS 3.4 utilities plus a small set of shared component
+  classes and CSS variables; no external UI component library is used. Light
+  theme colors include `#F3F5F9` background, `#FFFFFF` surfaces, `#172B4D`
+  text, and `#2563EB` primary actions. Dark theme uses `#101827` background,
+  `#182438` surfaces, `#E6EDF7` text, and `#5794F7` primary actions. The theme
+  toggle remembers the selection and follows the operating-system preference
+  when no saved preference exists.
+- **Typography:** Inter (weights 400–700), loaded from Google Fonts, with DM
+  Sans, Segoe UI, and system sans-serif fallbacks.
+- **Icons and branding:** purpose-built inline SVG React components in
+  [`client/src/shared/components/icons.tsx`](client/src/shared/components/icons.tsx);
+  there is no third-party icon library. The project logo and PWA favicon are
+  SVG/PNG assets in `design/logo`, `assets`, and `client/public`.
+- **Motion and accessibility:** CSS transitions and entrance animations,
+  Lenis smooth scrolling synchronized with GSAP, visible keyboard focus, and
+  reduced-motion handling. Layouts and dialogs adapt to mobile and desktop.
 
 ## Tech stack
 
 | Area | Technologies |
 |---|---|
-| Frontend | React, TypeScript (strict), Vite, Tailwind CSS |
+| Frontend | React 19, TypeScript (strict), Vite, Tailwind CSS |
 | Routing and server state | React Router, TanStack Query |
 | Forms and validation | React Hook Form, Zod |
 | Drag and drop | dnd-kit |
+| Motion and scrolling | GSAP, Lenis |
 | Backend | Express 5, TypeScript, Zod |
 | Persistence and authentication | JSON-file storage, JWT |
 | AI integration | Built-in mock assistant or an OpenAI-compatible API |
@@ -63,6 +117,11 @@ using it, make sure `AI_API_KEY` is empty to use the built-in mock assistant, or
 replace it with your own provider key. Set a private, long random `JWT_SECRET`.
 Never commit `.env` files or API keys, and do not copy credentials belonging to
 someone else.
+
+The server reads `PORT`, `CLIENT_ORIGIN`, `JWT_SECRET`, `JWT_EXPIRES_IN`, and
+`DATA_FILE` for local configuration. To use a real AI provider, configure
+`AI_API_KEY`, `AI_BASE_URL`, and `AI_MODEL` for an OpenAI-compatible Chat
+Completions endpoint; otherwise leave `AI_API_KEY` empty for mock mode.
 
 ```bash
 npm run seed
